@@ -1,0 +1,76 @@
+<style>
+	.createWorkflowTable {
+		 margin: 0 auto;
+		 width: 1024px;
+		 background-color: white;
+		 min-height: 100vh;
+		 padding: 10px;
+	}
+	.stepsTable {
+		width: 100%;
+	}
+	.stepsTable tbody tr {
+		vertical-align: top;
+	}
+	.stepsTable tbody tr:NTH-CHILD(2) td {
+		padding-bottom: 20px;
+	}
+	.stepsTable tbody tr td {
+		padding: 3px;
+	}
+</style>
+<section>
+	<h1 class="heading">Workflow</h1>
+	<div style="padding: 0 10px;">
+		<table class="stepsTable" cellspacing="0">
+			<colgroup>
+				<col width="25%" />
+				<col width="25%" />
+				<col width="25%" />
+				<col width="25%" />
+			</colgroup>
+			<tbody>
+				<tr>
+					<td>Name</td>
+					<td>Path</td>
+					<td style="text-align: center">Ignore</td>
+					<td style="text-align: center">Positive</td>
+				</tr>
+				<tr>
+					<td><input type="text" data-ng-model="workflow.name" class="width_100per" placeholder="Workflow Name" /></td>
+					<td><input type="text" data-ng-model="workflow.path" class="width_100per" placeholder="Path" /></td>
+					<td style="text-align: center"><input type="checkbox" data-ng-model="workflow.isIgnorable" /></td>
+					<td style="text-align: center"><input type="checkbox" data-ng-model="workflow.isPositive" /></td>
+				</tr>
+				<tr>
+					<td>Selector</td>
+					<td>Name</td>
+					<td>Action</td>
+					<td>Value</td>
+					<td>Delay</td>
+				</tr>
+				<tr data-ng-repeat="step in workflow.steps">
+					<td>
+						<select class="width_100per" data-ng-model="step.selector" data-ng-options="value for value in step.selectors">
+						</select>
+					</td>
+					<td>
+						<input class="width_100per" type="text" data-ng-model="step.name" placeholder="Name" />
+					</td>
+					<td>
+						<select class="width_100per" data-ng-model="step.action" data-ng-options="value for value in step.actions">
+						</select>
+					</td>
+					<td>
+						<textarea class="width_100per" data-ng-focus="onValueFocus()" data-ng-blur="onValueFocusLost()" data-ng-model="step.value" placeholder="Value"></textarea>
+					</td>
+					<td><input type="text" data-ng-model="step.delay" placeholder="Delay in Seconds" /></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr><th colspan="5" style="text-align: center"><button style="width: 100%" data-ng-click="addNewStep()">Add Step</button></th></tr>
+				<tr><th colspan="5" style="text-align: center"><button style="width: 100%" data-ng-click="create()">Create</button></th></tr>
+			</tfoot>
+		</table>
+	</div>
+</section>

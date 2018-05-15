@@ -1,0 +1,109 @@
+<style>
+	.configureProjectSection {
+	}
+	.projectsTable {
+		width: 100%;
+		margin-top: 20px;
+		border-collapse: separate;
+		border-spacing: 5px;
+	}
+	.projectsTable > thead > tr > th {
+		text-align: center;
+	}
+	.actionButton {
+		border: 0;
+		border-radius: 30px;
+		color: white;
+		padding: 5px 10px;
+	}
+	.actionButton_box {
+		border: 0;
+		border-radius: 10px;
+		color: white;
+		padding: 5px;
+	}
+</style>
+<section class="configureProjectSection">
+	<h1 class="heading">Projects</h1>
+	<div>
+		<table class="projectsTable">
+			<colgroup>
+				<col />
+				<col width="23%" />
+				<col width="23%" />
+				<col width="23%" />
+				<col width="23%" />
+				<col width="8%" />
+			</colgroup>
+			<thead>
+				<tr>
+					<td></td>
+					<th>Name</th>
+					<th>URL</th>
+					<th>Environment</th>
+					<th>Browser</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td><input type="text" data-ng-model="newProject.name" class="width_100per" /></td>
+					<td><input type="text" data-ng-model="newProject.url" class="width_100per" /></td>
+					<td>
+						<select class="width_100per" data-ng-model="newProject.environment" data-ng-options="value for value in environments">
+						</select>
+					</td>
+					<td>
+						<select class="width_100per" data-ng-model="newProject.browser" data-ng-options="value for value in browsers">
+						</select>
+					</td>
+					<td style="text-align: center">
+						<button class="actionButton" style="width: 100%; background-color: #61c19a" data-ng-click="create()"><img src="../icons/add.svg" style="border: 0; width: 10px;" /></button>
+					</td>
+				</tr>
+				<tr data-ng-repeat-start="project in projects">
+					<td>
+						<button class="actionButton_box" style="width: 30px; background-color: #61c19a" data-ng-click="expandOrCollapseSubProjectsSection(project)"><img src="../icons/add.svg" style="border: 0; width: 10px;" /></button>
+					</td>
+					<td><input class="width_100per" type="text" data-ng-model="project.name" data-ng-disabled="project.disabled" /></td>
+					<td><input class="width_100per" type="text" data-ng-model="project.url" data-ng-disabled="project.disabled" /></td>
+					<td>
+						<select class="width_100per" data-ng-disabled="project.disabled" data-ng-model="project.environment" data-ng-options="value for value in project.environments">
+						</select>
+					</td>
+					<td>
+						<select class="width_100per" data-ng-disabled="project.disabled" data-ng-model="project.browser" data-ng-options="value for value in project.browsers">
+						</select>
+					</td>
+					<td style="text-align: center">
+						<button class="actionButton" style="background-color: #61c19a" data-ng-style="project.editAndConfigureButtonStyle" data-ng-click="edit(project)"><img src="../icons/edit.svg" style="border: 0; width: 10px;" /></button>
+						<button class="actionButton" style="background-color: #73bae5" data-ng-style="project.editAndConfigureButtonStyle" data-ng-click="configure(project)"><img src="../icons/configure.svg" style="border: 0; width: 10px;" /></button>
+						<button class="actionButton" style="background-color: #e15d5d" data-ng-style="project.cancelAndUpdateButtonStyle" data-ng-click="cancel(project)"><img src="../icons/cancel.svg" style="border: 0; width: 10px;" /></button>
+						<button class="actionButton" style="background-color: #61c19a" data-ng-style="project.cancelAndUpdateButtonStyle" data-ng-click="update(project)"><img src="../icons/save.svg" style="border: 0; width: 10px;" /></button>
+					</td>
+				</tr>
+				<tr data-ng-repeat-end data-ng-style="project.showSubProjects" data-ng-repeat="subProject in project.subProjects">
+					<td></td>
+					<td><input class="width_100per" type="text" data-ng-model="subProject.name" data-ng-disabled="subProject.disabled" /></td>
+					<td><input class="width_100per" type="text" data-ng-model="subProject.url" data-ng-disabled="subProject.disabled" /></td>
+					<td>
+						<select class="width_100per" data-ng-disabled="subProject.disabled" data-ng-model="subProject.environment" data-ng-options="value for value in subProject.environments">
+						</select>
+					</td>
+					<td>
+						<select class="width_100per" data-ng-disabled="subProject.disabled" data-ng-model="subProject.browser" data-ng-options="value for value in subProject.browsers">
+						</select>
+					</td>
+					<td style="text-align: center">
+						<button class="actionButton" style="width: 100%; background-color: #61c19a" data-ng-style="subProject.createSubProjectButtonStyle" data-ng-click="createSubProject(project)"><img src="../icons/add.svg" style="border: 0; width: 10px;" /></button>
+						<button class="actionButton" style="background-color: #61c19a" data-ng-style="subProject.editAndConfigureButtonStyle" data-ng-click="edit(subProject)"><img src="../icons/edit.svg" style="border: 0; width: 10px;" /></button>
+						<button class="actionButton" style="background-color: #73bae5" data-ng-style="subProject.editAndConfigureButtonStyle" data-ng-click="configure(subProject)"><img src="../icons/configure.svg" style="border: 0; width: 10px;" /></button>
+						<button class="actionButton" style="background-color: #e15d5d" data-ng-style="subProject.cancelAndUpdateButtonStyle" data-ng-click="cancel(subProject)"><img src="../icons/cancel.svg" style="border: 0; width: 10px;" /></button>
+						<button class="actionButton" style="background-color: #61c19a" data-ng-style="subProject.cancelAndUpdateButtonStyle" data-ng-click="update(subProject, true)"><img src="../icons/save.svg" style="border: 0; width: 10px;" /></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>

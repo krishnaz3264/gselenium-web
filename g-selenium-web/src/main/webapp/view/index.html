@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+		<title>G-Selenuim-Web</title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap-3.3.5.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/daterangepicker-2.1.13.min.css" />
+		<!-- https://code.angularjs.org/1.6.4/ -->
+		<script src="../lib/angular.min.js"></script>
+		<script src="../lib/angular-route.js"></script>
+		
+		<script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="../lib/moment-2.10.6.min.js"></script>
+		<script type="text/javascript" src="../lib/bootstrap-3.3.5.min.js"></script>
+		<script type="text/javascript" src="../lib/daterangepicker-2.1.13.min.js"></script>
+		<script type="text/javascript" src="../lib/angular-daterangepicker.min.js"></script>
+		<script type="text/javascript" src="../lib/tpls.js"></script>
+		<script type="text/javascript" src="../lib/ui-bootstrap-tpls-0.11.2.js"></script>
+		
+		<script src="../GSeleniumWebApp.js"></script>
+		<script src="../controller/WorkflowController.js"></script>
+		<script src="../controller/ProjectController.js"></script>
+		<script src="../service/GSeleniumWebAppService.js"></script>
+		<style type="text/css">
+		* {
+			box-sizing: border-box;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+		}
+		body {
+			background-color: #1e3367;
+			margin: 0;
+			-webkit-print-color-adjust:exact;
+			box-sizing: border-box;
+		}
+		input:focus, select:focus, button:focus, textarea:focus {
+		    outline: none;
+		}
+		.modal {
+		  text-align: center;
+		}
+		.modal::before {
+		  content: '';
+		  display: inline-block;
+		  height: 100%;
+		  vertical-align: middle;
+		  margin-right: -4px;
+		}
+		
+		.modal-dialog {
+		  display: inline-block;
+		  text-align: left;
+		  vertical-align: middle;
+		}
+		.gsaView {
+			min-height: 100vh;
+			width: 1024px;
+			background-color: white;
+			margin: 0 auto;
+		}
+		input[type=text], select {
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			padding: 5px 10px;
+		}
+		input[type=checkbox] {
+			width: 25px;
+			height: 25px;
+		}
+		.width_100per {
+			width: 100%;
+		}
+		select {
+			padding-bottom: 8px;
+		}
+		textarea {
+	 		border-radius: 5px;
+	 		padding: 5px 10px;
+	 		resize: none;
+	 		height: 32px;
+	 		-webkit-transition: height 0.3s;
+		}
+		.heading {
+			margin: 0;
+			padding: 10px;
+			background-color: #bfe7ff;
+			margin-bottom: 30px;
+		}
+		</style>
+	</head>
+	<body data-ng-app="gSeleniumWebApp">
+		<div data-ng-view class="gsaView"></div>
+	</body>
+	<script type="text/ng-template" id="ModalLoadingContent.html">
+		<div style="padding: 5px; text-align: center">
+			<h4 class="modal-header">{{data.title}}</h4>
+			<div class="modal-body">
+				<img id="loader" src="../images/loading.gif" />
+				<br />
+				<span id="loadingModalText">{{data.body}}</span>
+			</div>
+		</div>
+    </script>
+    <script type="text/ng-template" id="ErrorModal.html">
+		<div style="padding: 5px; text-align: center">
+			<h4 class="modal-header">Error</h4>
+			<div class="modal-body" id="modal-body">
+				<span id="loadingModalText">{{data.messageDescription}}</span><br/>
+        	</div>
+        	<div class="modal-footer">
+				<button data-ng-click="close()"  class="center-block button-style" >OK</button>
+			</div>
+		</div>
+    </script>
+    <script type="text/ng-template" id="LoginFailed.html">
+		<div style="text-align: center;">
+        	<div class="modal-header">
+            	<h3 class="modal-title" id="modal-title">Login Failed</h3>
+        	</div>
+        	<div class="modal-body" id="modal-body">
+				<span id="loadingModalText">{{data.messageDescription}}</span><br/>
+        	</div>
+        	<div class="modal-footer">
+				<button data-ng-click="close()" style="border-radius:8px;width: 60px;height: 40px;background-color:white;border:1px solid black;" class="center-block">OK</button>
+			</div>
+		</div>
+    </script>    
+    <script type="text/ng-template" id="ConfirmModal.html">
+		<div style="padding: 5px; text-align: center">
+			<h4 class="modal-header">{{data.messageDescription}}</h4>
+			<div class="modal-body">
+				<button data-ng-click="confirm()" style="margin-right: 10px;border-radius: 8px;background-color: white;width: 60px;height: 40px;border:1px solid black;">Yes</button>
+				<button data-ng-click="close()" style="border-radius: 8px;background-color: white;width: 60px;height: 40px;border:1px solid black;">No</button>
+			</div>
+		</div>
+    </script>
+    <script type="text/ng-template" id="SuccessModal.html">
+		<div style="padding: 5px; text-align: center">
+			<h4 class="modal-header">Success</h4>
+			<div class="modal-body" id="modal-body">
+				<span id="loadingModalText">{{data.messageDescription}}</span><br/>
+        	</div>
+        	<div class="modal-footer">
+				<button data-ng-click="close()" class="center-block" style="border-radius:8px;width: 60px;height: 40px;background-color:white;border:1px solid black;">OK</button>
+			</div>
+		</div>
+    </script>
+
+</html>
